@@ -54,14 +54,9 @@ int exercicio3(){
                 } else {
                     m[i][j] = 0;
                 }
-            }
-        }
 
-        #pragma omp for
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
                 if(m[i][j] == 1){
-                   x[i] = 1;
+                    x[i] = 1;
                 }
             }
         }
@@ -72,10 +67,29 @@ int exercicio3(){
                 min = v[i];
             }
         }
-
     }
 
     return min;
+}
+
+// 4) Escreva uma função map que aplica uma determinada função passada como parâmetro em todos os elementos do vetor.
+// Exemplo:
+//               map(vetor, dobro)
+
+//               void dobro(int x) {   return 2 * x;   }
+
+int dobro(int x){
+    return 2 * x;
+}
+
+void map(int size, int *vetor, int (*f)(int)){
+    #pragma omp parallel shared(vetor, f, size)
+    {
+        #pragma omp for
+        for(int i = 0; i < size; i++){
+            vetor[i] = f(vetor[i]);
+        }
+    }
 }
 
 int main(int argc, char* argv[]) {
@@ -89,6 +103,14 @@ int main(int argc, char* argv[]) {
     }
 
     printf("Menor valor do vetor é: %d\n", exercicio3());
+
+    int vet[3] = {3, 4, 5};
+
+    map(3, vet, dobro);
+
+    for(int i = 0; i < 3; i++){
+        printf("O valor do elemento %d é: %d\n", i, vet[i]);
+    }
 
     free(vetor);
 
