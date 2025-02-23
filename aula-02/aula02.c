@@ -72,12 +72,6 @@ int exercicio3(){
     return min;
 }
 
-// 4) Escreva uma função map que aplica uma determinada função passada como parâmetro em todos os elementos do vetor.
-// Exemplo:
-//               map(vetor, dobro)
-
-//               void dobro(int x) {   return 2 * x;   }
-
 int dobro(int x){
     return 2 * x;
 }
