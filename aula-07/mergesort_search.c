@@ -1,9 +1,7 @@
-// mergesort_search.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h>
 
-// mescla arr[l..m] e arr[m+1..r] em tmp[]
 void merge(int *arr, int l, int m, int r, int *tmp) {
     int i = l, j = m+1, k = 0;
     while (i <= m && j <= r)
@@ -14,7 +12,6 @@ void merge(int *arr, int l, int m, int r, int *tmp) {
         arr[l + i] = tmp[i];
 }
 
-// recursão do MergeSort
 void mergesort_rec(int *arr, int l, int r, int *tmp) {
     if (l < r) {
         int m = (l + r) / 2;
@@ -37,7 +34,6 @@ void mergesort(int *arr, int n) {
     free(tmp);
 }
 
-// busca binária iterativa em arr[0..n-1]
 int binary_search(int *arr, int n, int key) {
     int l = 0, r = n-1;
     while (l <= r) {
@@ -46,7 +42,7 @@ int binary_search(int *arr, int n, int key) {
         else if (arr[m] < key)  l = m + 1;
         else                    r = m - 1;
     }
-    return -1;  // não encontrado
+    return -1;
 }
 
 int main() {

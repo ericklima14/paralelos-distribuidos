@@ -47,7 +47,7 @@ void sum_parallel_omp(char* output, const unsigned long d, const unsigned long n
     for (unsigned long i = 1; i <= d; ++i) {
         len += sprintf(output + len, "%lu", digits[i]);
     }
-    output[len] = '\\0';
+    output[len] = '\0';
 
     free(digits);
 }
